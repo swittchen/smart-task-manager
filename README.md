@@ -1,4 +1,4 @@
-# Smart Task Manager — Full‑Stack Starter (Spring Boot + React + PostgreSQL + Docker Compose)
+# Smart Task Manager (Spring Boot + React + PostgreSQL + Docker Compose)
 
 This repository is a **starter template** for building secure full‑stack web applications with:
 
