@@ -33,7 +33,7 @@ public class User {
     // getter / setter
 
 
-    public Long Id() {
+    public Long getId() {
         return Id;
     }
 
@@ -41,7 +41,7 @@ public class User {
         Id = id;
     }
 
-    public String email() {
+    public String getEmail() {
         return email;
     }
 
@@ -49,7 +49,7 @@ public class User {
         this.email = email;
     }
 
-    public String passwordHash() {
+    public String getPasswordHash() {
         return passwordHash;
     }
 
@@ -57,7 +57,7 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    public Role role() {
+    public Role getRole() {
         return role;
     }
 
@@ -65,7 +65,7 @@ public class User {
         this.role = role;
     }
 
-    public List<Task> tasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 

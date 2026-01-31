@@ -33,7 +33,7 @@ public class Task {
     // getter / setter
 
 
-    public Long id() {
+    public Long getId() {
         return id;
     }
 
@@ -41,7 +41,7 @@ public class Task {
         this.id = id;
     }
 
-    public String title() {
+    public String getTitle() {
         return title;
     }
 
@@ -49,7 +49,7 @@ public class Task {
         this.title = title;
     }
 
-    public String description() {
+    public String getDescription() {
         return description;
     }
 
@@ -57,7 +57,7 @@ public class Task {
         this.description = description;
     }
 
-    public String status() {
+    public String getStatus() {
         return status;
     }
 
@@ -65,7 +65,7 @@ public class Task {
         this.status = status;
     }
 
-    public String category() {
+    public String getCategory() {
         return category;
     }
 
@@ -73,7 +73,7 @@ public class Task {
         this.category = category;
     }
 
-    public User user() {
+    public User getUser() {
         return user;
     }
 
