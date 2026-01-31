@@ -100,6 +100,11 @@ export default function Tasks() {
     }
   }
 
+  function statusBadgeClass(status) {
+    if (status === "DONE") return "badge badgeStatusDone";
+    return "badge badgeStatusOpen"; // default OPEN
+  }
+
   return (
     <div className="container">
       {/* Header */}
@@ -144,7 +149,7 @@ export default function Tasks() {
             </Button>
           </form>
 
-          <div style={{ marginTop: 18, paddingTop: 18, borderTop: "1px solid rgba(255,255,255,0.10)" }}>
+          <div style={{ marginTop: 18, paddingTop: 18, borderTop: "1px solid rgba(31,35,40,0.12)" }}>
             <h2 className="h2" style={{ marginBottom: 10 }}>
               Search
             </h2>
@@ -195,9 +200,11 @@ export default function Tasks() {
                     )}
 
                     <div className="badges">
-                      <span className="badge badgeCyan">
-                        status: <b style={{ color: "#e4e4e7" }}>{t.status}</b>
+                      {/* STATUS: now strong + color-coded */}
+                      <span className={statusBadgeClass(t.status)}>
+                        status: <b style={{ fontWeight: 900 }}>{t.status}</b>
                       </span>
+
                       <span className="badge badgeGreen">
                         category: {t.category || "—"}
                       </span>
@@ -205,13 +212,18 @@ export default function Tasks() {
                   </div>
 
                   <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    {/* Button label depends on current status:
+                        OPEN -> shows "OPEN" (clickable, marks done)
+                        DONE -> shows "DONE" (disabled)
+                    */}
                     <Button
                       variant="ghost"
                       onClick={() => markDone(t.id)}
                       disabled={t.status === "DONE"}
+                      title={t.status === "DONE" ? "Already done" : "Click to mark as DONE"}
                     >
                       <CheckCircle2 size={18} />
-                      Done
+                      {t.status === "DONE" ? "DONE" : "OPEN"}
                     </Button>
 
                     <Button variant="danger" onClick={() => remove(t.id)}>

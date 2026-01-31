@@ -1,136 +1,98 @@
 /* =========================================================
-   LIGHT THEME: GitHub-clean × Violet/Green Aurora
-   - bright background, clean panels
-   - green primary accent (matrix-ish but tasteful)
-   - violet secondary glow for personality
+   Neon Matrix Green × Violet (GitHub-like font stack)
+   Works with your classes: card, btn, btnPrimary, input, task,
+   badges, authPage/authCard/authHeader/authFooter/authLink, etc.
    ========================================================= */
 
 :root{
-  /* ===== SURFACE / BACKGROUND ===== */
-  --bg: #f6f8fa;           /* GitHub light-ish */
-  --bg2: #ffffff;
+  --bg-main: #050008;
+  --bg-card: rgba(8, 8, 16, 0.92);
+  --bg-card-border: rgba(120, 255, 190, 0.40);
 
-  /* ===== TEXT ===== */
-  --text: #1f2328;
-  --muted: #57606a;
+  --accent-green: #39ff14;
+  --accent-green-soft: rgba(57, 255, 20, 0.15);
 
-  /* ===== PANELS ===== */
-  --panel: rgba(255,255,255,0.78);
-  --panel-strong: rgba(255,255,255,0.92);
-  --border: rgba(31,35,40,0.14);
+  --accent-violet: #7b2cff;
+  --accent-violet-soft: rgba(123, 44, 255, 0.25);
 
-  /* ===== ACCENTS ===== */
-  --green: #1f883d;               /* GitHub green */
-  --green-2: #2da44e;             /* hover */
-  --green-soft: rgba(45,164,78,0.18);
+  --accent-cyan: #22d3ee;
+  --accent-cyan-soft: rgba(34, 211, 238, 0.15);
 
-  --violet: #8250df;
-  --violet-soft: rgba(130,80,223,0.18);
+  --text-main: #e5f9ff;
+  --text-muted: #7a8c99;
 
-  --cyan: #0ea5e9;
-  --cyan-soft: rgba(14,165,233,0.16);
+  --danger: #ff4b81;
+  --danger-soft: rgba(255, 75, 129, 0.16);
 
-  /* ===== DANGER ===== */
-  --danger: #cf222e;
-  --danger-soft: rgba(207,34,46,0.12);
+  --shadow-strong: 0 0 40px rgba(57, 255, 20, 0.28);
+  --shadow-card: 0 24px 60px rgba(0,0,0,0.85);
 
-  /* ===== RADIUS ===== */
-  --r12: 12px;
-  --r16: 16px;
-  --r20: 20px;
+  --radius-xl: 20px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
 
-  /* ===== SHADOWS ===== */
-  --shadow-soft: 0 10px 24px rgba(31,35,40,0.10);
-  --shadow-strong: 0 22px 60px rgba(31,35,40,0.14);
-
-  /* Focus ring */
-  --focus: 0 0 0 3px rgba(45,164,78,0.22);
+  --transition-fast: 0.18s ease-out;
+  --transition-medium: 0.25s ease-out;
 }
 
-/* =========================================================
-   RESET / BASE
-   ========================================================= */
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+}
 
-*{ box-sizing: border-box; }
-html, body, #root{ height: 100%; }
+html, body, #root{
+  height: 100%;
+}
 
 body{
   margin: 0;
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    Helvetica,
-    Arial,
-    "Apple Color Emoji",
-    "Segoe UI Emoji";
-  color: var(--text);
-  background: var(--bg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
+
+  color: var(--text-main);
+  background: radial-gradient(circle at top, #12001f 0, #020006 60%, #000 100%);
   overflow-x: hidden;
 }
 
-/* =========================================================
-   AURORA LIGHT BACKGROUND (NO DARK THEME)
-   ========================================================= */
-
+/* Soft neon aurora (no carbon noise) */
 body::before{
   content:"";
   position: fixed;
   inset: -15%;
-  pointer-events:none;
+  pointer-events: none;
   z-index: -1;
 
   background:
-    radial-gradient(900px 650px at 14% 18%, rgba(130,80,223,0.20), transparent 60%),
-    radial-gradient(900px 650px at 86% 22%, rgba(45,164,78,0.18), transparent 62%),
-    radial-gradient(700px 520px at 65% 85%, rgba(14,165,233,0.14), transparent 60%),
-    radial-gradient(1000px 700px at 35% 90%, rgba(130,80,223,0.12), transparent 62%);
+    radial-gradient(circle at 12% 12%, rgba(123, 44, 255, 0.30), transparent 55%),
+    radial-gradient(circle at 88% 18%, rgba(57, 255, 20, 0.20), transparent 58%),
+    radial-gradient(circle at 70% 85%, rgba(34, 211, 238, 0.12), transparent 60%),
+    radial-gradient(circle at 35% 90%, rgba(123, 44, 255, 0.18), transparent 62%);
   filter: blur(10px);
 }
 
-/* very subtle paper grid */
+/* Subtle scanlines */
 body::after{
   content:"";
   position: fixed;
   inset: 0;
-  pointer-events:none;
+  pointer-events: none;
   z-index: -1;
 
-  background-image:
-    linear-gradient(rgba(31,35,40,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(31,35,40,0.03) 1px, transparent 1px);
-  background-size: 72px 72px;
-  opacity: 0.45;
-  mask-image: radial-gradient(circle at 35% 20%, black 45%, transparent 75%);
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(57,255,20,0.05),
+    rgba(57,255,20,0.05) 1px,
+    transparent 1px,
+    transparent 7px
+  );
+  opacity: 0.16;
+  mix-blend-mode: screen;
 }
 
 /* =========================================================
-   TYPOGRAPHY
-   ========================================================= */
-
-.h1{
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  margin: 0;
-}
-
-.h2{
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  margin: 0 0 10px;
-}
-
-.muted{
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* =========================================================
-   LAYOUT HELPERS
+   Layout helpers
    ========================================================= */
 
 .container{
@@ -143,152 +105,276 @@ body::after{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px;
-  flex-wrap:wrap;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .grid2{
   display:grid;
-  gap:18px;
+  gap: 18px;
   grid-template-columns: 1fr;
 }
 @media (min-width: 900px){
   .grid2{ grid-template-columns: 1fr 1fr; }
 }
 
-/* =========================================================
-   CARD (GLASS ON LIGHT)
-   ========================================================= */
+.h1{
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
 
-.card{
-  background: linear-gradient(180deg, var(--panel-strong), var(--panel));
-  border: 1px solid var(--border);
-  border-radius: var(--r20);
-  padding: 18px;
-  backdrop-filter: blur(14px);
-  box-shadow: var(--shadow-strong);
+.h2{
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+
+.muted{
+  color: var(--text-muted);
+  font-size: 13px;
 }
 
 /* =========================================================
-   INPUTS
+   Card (matches your <Card /> component -> .card)
+   ========================================================= */
+
+.card{
+  position: relative;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--bg-card-border);
+
+  background:
+    linear-gradient(135deg, rgba(57,255,20,0.08), rgba(123,44,255,0.12)),
+    radial-gradient(circle at top left, rgba(123,44,255,0.16), transparent),
+    radial-gradient(circle at bottom right, rgba(57,255,20,0.20), transparent),
+    var(--bg-card);
+
+  box-shadow: var(--shadow-card), var(--shadow-strong);
+  backdrop-filter: blur(10px);
+  padding: 18px;
+  overflow: hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 10% 0, rgba(57,255,20,0.16), transparent 45%);
+  pointer-events:none;
+}
+
+/* =========================================================
+   Inputs (your Input uses .input + .label wrappers)
    ========================================================= */
 
 .inputWrap{
   display:flex;
   flex-direction:column;
-  gap:8px;
+  gap: 8px;
 }
 
 .label{
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-green);
+  text-shadow: 0 0 12px rgba(57,255,20,0.35);
 }
 
 .input{
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: var(--r12);
-  border: 1px solid rgba(31,35,40,0.18);
-  background: rgba(255,255,255,0.92);
-  color: var(--text);
+  padding: 11px 13px;
+  font-size: 0.95rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(130, 255, 195, 0.53);
+
+  background:
+    radial-gradient(circle at top, rgba(11, 255, 167, 0.06), transparent 60%),
+    rgba(2, 5, 10, 0.96);
+
+  color: var(--text-main);
   outline: none;
-  transition: .15s;
-  box-shadow: 0 1px 0 rgba(31,35,40,0.04);
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast),
+    background var(--transition-fast);
 }
 
 .input::placeholder{
-  color: rgba(87,96,106,0.65);
+  color: rgba(170, 214, 200, 0.60);
 }
 
 .input:focus{
-  border-color: rgba(45,164,78,0.55);
-  box-shadow: var(--focus);
+  border-color: var(--accent-green);
+  box-shadow:
+    0 0 0 1px rgba(57,255,20,0.55),
+    0 0 18px rgba(57,255,20,0.45);
+  transform: translateY(-1px);
+  background: rgba(3, 12, 8, 0.98);
 }
 
 /* =========================================================
-   BUTTONS
+   Buttons (your Button component -> .btn + variants)
    ========================================================= */
 
 .btn{
+  position: relative;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:10px;
-  padding: 11px 14px;
-  border-radius: var(--r12);
-  border: 1px solid rgba(31,35,40,0.18);
-  background: rgba(255,255,255,0.92);
-  color: var(--text);
-  font-weight: 700;
+  gap: 10px;
+
+  padding: 10px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(120, 255, 190, 0.30);
+
+  background: rgba(0,0,0,0.20);
+  color: var(--text-main);
+
   cursor: pointer;
-  transition: .15s;
-  box-shadow: 0 1px 0 rgba(31,35,40,0.04);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  user-select:none;
+
+  transition:
+    transform var(--transition-medium),
+    box-shadow var(--transition-medium),
+    background var(--transition-medium),
+    border-color var(--transition-medium),
+    opacity var(--transition-medium);
+}
+
+.btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 10% 0, rgba(255,255,255,0.12), transparent 45%);
+  opacity: 0;
+  transition: opacity var(--transition-medium);
+  pointer-events:none;
 }
 
 .btn:hover{
-  border-color: rgba(45,164,78,0.45);
-  box-shadow: 0 0 0 3px rgba(45,164,78,0.14);
+  transform: translateY(-1px) scale(1.01);
+  border-color: rgba(57,255,20,0.55);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.90), 0 0 24px rgba(57,255,20,0.35);
+  background: rgba(0,0,0,0.26);
 }
 
+.btn:hover::before{
+  opacity: 1;
+}
+
+.btn:active{
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.85);
+}
+
+.btn:disabled{
+  opacity: 0.50;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Primary */
 .btnPrimary{
-  border-color: rgba(31,136,61,0.55);
-  background: linear-gradient(180deg, rgba(45,164,78,0.95), rgba(31,136,61,0.95));
-  color: #ffffff;
-  box-shadow: 0 10px 22px rgba(31,136,61,0.18);
+  border: 1px solid rgba(57, 255, 20, 0.80);
+
+  background:
+    radial-gradient(circle at 20% 0, rgba(57, 255, 20, 0.30), transparent 55%),
+    linear-gradient(135deg, #061708, #02140a 45%, #041c0f 100%);
+
+  color: #dfffe9;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(57,255,20,0.45);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.85);
 }
 
 .btnPrimary:hover{
-  background: linear-gradient(180deg, rgba(54,179,98,0.98), rgba(31,136,61,0.98));
-  box-shadow: 0 14px 28px rgba(31,136,61,0.22), 0 0 0 3px rgba(45,164,78,0.16);
+  border-color: #9bff7c;
+  background:
+    radial-gradient(circle at 30% 0, rgba(57, 255, 20, 0.40), transparent 60%),
+    linear-gradient(135deg, #071f0b, #031a0c 45%, #082712 100%);
 }
 
+/* Danger */
 .btnDanger{
-  border-color: rgba(207,34,46,0.35);
-  background: rgba(207,34,46,0.10);
-  color: #a40e26;
+  border-color: rgba(255, 75, 129, 0.65);
+  background:
+    radial-gradient(circle at 20% 0, rgba(255, 75, 129, 0.22), transparent 55%),
+    rgba(0,0,0,0.22);
+  color: #ffd3e1;
+  text-shadow: 0 0 10px rgba(255,75,129,0.35);
 }
-
 .btnDanger:hover{
-  box-shadow: 0 0 0 3px rgba(207,34,46,0.14);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.92), 0 0 22px rgba(255,75,129,0.35);
 }
 
+/* Ghost */
 .btnGhost{
   background: transparent;
-  border-color: rgba(31,35,40,0.12);
-}
-
-/* Disabled (your Button component likely adds disabled attr) */
-.btn:disabled{
-  opacity: 0.55;
-  cursor: not-allowed;
+  border-color: rgba(120,255,190,0.22);
 }
 
 /* =========================================================
-   TOAST
+   Toast
    ========================================================= */
 
 .toast{
-  border-radius: var(--r12);
+  border-radius: var(--radius-lg);
   padding: 12px 14px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.90);
+  border: 1px solid rgba(120,255,190,0.25);
+  background: rgba(0,0,0,0.25);
   font-size: 14px;
 }
 
 .toast.success{
-  border-color: rgba(31,136,61,0.30);
-  background: rgba(45,164,78,0.12);
-  color: #0f5f2a;
+  border-color: rgba(57,255,20,0.60);
+  background: rgba(57,255,20,0.12);
+  color: var(--accent-green);
+  text-shadow: 0 0 10px rgba(57,255,20,0.25);
 }
 
 .toast.error{
-  border-color: rgba(207,34,46,0.30);
-  background: rgba(207,34,46,0.10);
-  color: #8a0d20;
+  border-color: rgba(255,75,129,0.60);
+  background: rgba(255,75,129,0.12);
+  color: var(--danger);
+  text-shadow: 0 0 10px rgba(255,75,129,0.25);
 }
 
 /* =========================================================
-   BADGES
+   Task item
+   ========================================================= */
+
+.task{
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(120,255,190,0.22);
+  background: rgba(0,0,0,0.18);
+  padding: 14px;
+
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.task:hover{
+  transform: translateY(-1px);
+  border-color: rgba(123,44,255,0.45);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.88), 0 0 24px rgba(123,44,255,0.28);
+}
+
+/* =========================================================
+   Badges
    ========================================================= */
 
 .badges{
@@ -304,38 +390,34 @@ body::after{
   padding: 6px 10px;
   border-radius: 999px;
   font-size: 12px;
-  border: 1px solid rgba(31,35,40,0.14);
-  background: rgba(255,255,255,0.90);
-  color: var(--muted);
+  border: 1px solid rgba(120,255,190,0.25);
+  background: rgba(0,0,0,0.28);
+  color: var(--text-muted);
 }
 
+/* category */
 .badgeGreen{
-  border-color: rgba(31,136,61,0.26);
-  background: rgba(45,164,78,0.12);
-  color: #0f5f2a;
+  border-color: rgba(57,255,20,0.50);
+  background: rgba(57,255,20,0.12);
+  color: #b9ffcf;
+}
+
+/* status OPEN should be clearly visible (light red) */
+.badgeStatusOpen{
+  border-color: rgba(255,75,129,0.55);
+  background: rgba(255,75,129,0.14);
+  color: #ffd3e1;
+}
+
+/* status DONE green */
+.badgeStatusDone{
+  border-color: rgba(57,255,20,0.65);
+  background: rgba(57,255,20,0.15);
+  color: #b9ffcf;
 }
 
 /* =========================================================
-   TASK ITEM
-   ========================================================= */
-
-.task{
-  border-radius: var(--r16);
-  border: 1px solid rgba(31,35,40,0.14);
-  background: rgba(255,255,255,0.75);
-  padding: 14px;
-  transition: .15s;
-  box-shadow: var(--shadow-soft);
-}
-
-.task:hover{
-  transform: translateY(-1px);
-  border-color: rgba(130,80,223,0.28);
-  box-shadow: 0 14px 28px rgba(31,35,40,0.12);
-}
-
-/* =========================================================
-   AUTH (LOGIN / REGISTER)
+   AUTH (login/register)
    ========================================================= */
 
 .authPage{
@@ -347,6 +429,7 @@ body::after{
 
 .authCard{
   width: min(420px, 100%);
+  padding: 20px;
 }
 
 .authHeader{
@@ -359,24 +442,29 @@ body::after{
 .authIcon{
   width: 44px;
   height: 44px;
-  border-radius: var(--r12);
+  border-radius: var(--radius-lg);
   display:grid;
   place-items:center;
-  border: 1px solid rgba(130,80,223,0.22);
+
+  border: 1px solid rgba(57,255,20,0.55);
   background:
-    radial-gradient(80% 80% at 20% 20%, rgba(130,80,223,0.20), transparent 60%),
-    linear-gradient(180deg, rgba(45,164,78,0.22), rgba(45,164,78,0.10));
-  box-shadow: 0 12px 26px rgba(130,80,223,0.10);
+    radial-gradient(circle at 20% 10%, rgba(57,255,20,0.20), transparent 55%),
+    linear-gradient(135deg, rgba(123,44,255,0.18), rgba(0,0,0,0.25));
+  box-shadow: 0 0 18px rgba(57,255,20,0.22);
 }
 
 .authTitle{
   font-size: 18px;
   font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-green);
+  text-shadow: 0 0 14px rgba(57,255,20,0.50);
 }
 
 .authSub{
   font-size: 13px;
-  color: var(--muted);
+  color: var(--text-muted);
   margin-top: 4px;
 }
 
@@ -389,16 +477,17 @@ body::after{
 .authFooter{
   margin-top: 16px;
   padding-top: 14px;
-  border-top: 1px solid rgba(31,35,40,0.12);
+  border-top: 1px solid rgba(123,44,255,0.35);
   display:flex;
   gap: 8px;
   align-items:center;
 }
 
 .authLink{
-  color: #0969da; /* GitHub link blue */
-  font-weight: 700;
+  color: #c7a6ff;
+  font-weight: 800;
   text-decoration: none;
+  text-shadow: 0 0 10px rgba(123,44,255,0.35);
 }
 
 .authLink:hover{
@@ -408,6 +497,7 @@ body::after{
 .authMeta{
   margin-top: 10px;
   font-size: 12px;
-  color: var(--muted);
+  color: var(--text-muted);
   text-align: center;
+  opacity: 0.9;
 }
