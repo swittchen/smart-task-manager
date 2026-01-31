@@ -1,68 +1,413 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* =========================================================
+   LIGHT THEME: GitHub-clean × Violet/Green Aurora
+   - bright background, clean panels
+   - green primary accent (matrix-ish but tasteful)
+   - violet secondary glow for personality
+   ========================================================= */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+:root{
+  /* ===== SURFACE / BACKGROUND ===== */
+  --bg: #f6f8fa;           /* GitHub light-ish */
+  --bg2: #ffffff;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* ===== TEXT ===== */
+  --text: #1f2328;
+  --muted: #57606a;
+
+  /* ===== PANELS ===== */
+  --panel: rgba(255,255,255,0.78);
+  --panel-strong: rgba(255,255,255,0.92);
+  --border: rgba(31,35,40,0.14);
+
+  /* ===== ACCENTS ===== */
+  --green: #1f883d;               /* GitHub green */
+  --green-2: #2da44e;             /* hover */
+  --green-soft: rgba(45,164,78,0.18);
+
+  --violet: #8250df;
+  --violet-soft: rgba(130,80,223,0.18);
+
+  --cyan: #0ea5e9;
+  --cyan-soft: rgba(14,165,233,0.16);
+
+  /* ===== DANGER ===== */
+  --danger: #cf222e;
+  --danger-soft: rgba(207,34,46,0.12);
+
+  /* ===== RADIUS ===== */
+  --r12: 12px;
+  --r16: 16px;
+  --r20: 20px;
+
+  /* ===== SHADOWS ===== */
+  --shadow-soft: 0 10px 24px rgba(31,35,40,0.10);
+  --shadow-strong: 0 22px 60px rgba(31,35,40,0.14);
+
+  /* Focus ring */
+  --focus: 0 0 0 3px rgba(45,164,78,0.22);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+/* =========================================================
+   RESET / BASE
+   ========================================================= */
 
-body {
+*{ box-sizing: border-box; }
+html, body, #root{ height: 100%; }
+
+body{
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    "Apple Color Emoji",
+    "Segoe UI Emoji";
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* =========================================================
+   AURORA LIGHT BACKGROUND (NO DARK THEME)
+   ========================================================= */
+
+body::before{
+  content:"";
+  position: fixed;
+  inset: -15%;
+  pointer-events:none;
+  z-index: -1;
+
+  background:
+    radial-gradient(900px 650px at 14% 18%, rgba(130,80,223,0.20), transparent 60%),
+    radial-gradient(900px 650px at 86% 22%, rgba(45,164,78,0.18), transparent 62%),
+    radial-gradient(700px 520px at 65% 85%, rgba(14,165,233,0.14), transparent 60%),
+    radial-gradient(1000px 700px at 35% 90%, rgba(130,80,223,0.12), transparent 62%);
+  filter: blur(10px);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+/* very subtle paper grid */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events:none;
+  z-index: -1;
+
+  background-image:
+    linear-gradient(rgba(31,35,40,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31,35,40,0.03) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.45;
+  mask-image: radial-gradient(circle at 35% 20%, black 45%, transparent 75%);
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+.h1{
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.h2{
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+}
+
+.muted{
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* =========================================================
+   LAYOUT HELPERS
+   ========================================================= */
+
+.container{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 16px;
+}
+
+.row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.grid2{
+  display:grid;
+  gap:18px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px){
+  .grid2{ grid-template-columns: 1fr 1fr; }
+}
+
+/* =========================================================
+   CARD (GLASS ON LIGHT)
+   ========================================================= */
+
+.card{
+  background: linear-gradient(180deg, var(--panel-strong), var(--panel));
+  border: 1px solid var(--border);
+  border-radius: var(--r20);
+  padding: 18px;
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-strong);
+}
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.inputWrap{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.label{
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.input{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--r12);
+  border: 1px solid rgba(31,35,40,0.18);
+  background: rgba(255,255,255,0.92);
+  color: var(--text);
+  outline: none;
+  transition: .15s;
+  box-shadow: 0 1px 0 rgba(31,35,40,0.04);
+}
+
+.input::placeholder{
+  color: rgba(87,96,106,0.65);
+}
+
+.input:focus{
+  border-color: rgba(45,164,78,0.55);
+  box-shadow: var(--focus);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding: 11px 14px;
+  border-radius: var(--r12);
+  border: 1px solid rgba(31,35,40,0.18);
+  background: rgba(255,255,255,0.92);
+  color: var(--text);
+  font-weight: 700;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: .15s;
+  box-shadow: 0 1px 0 rgba(31,35,40,0.04);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.btn:hover{
+  border-color: rgba(45,164,78,0.45);
+  box-shadow: 0 0 0 3px rgba(45,164,78,0.14);
+}
+
+.btnPrimary{
+  border-color: rgba(31,136,61,0.55);
+  background: linear-gradient(180deg, rgba(45,164,78,0.95), rgba(31,136,61,0.95));
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(31,136,61,0.18);
+}
+
+.btnPrimary:hover{
+  background: linear-gradient(180deg, rgba(54,179,98,0.98), rgba(31,136,61,0.98));
+  box-shadow: 0 14px 28px rgba(31,136,61,0.22), 0 0 0 3px rgba(45,164,78,0.16);
+}
+
+.btnDanger{
+  border-color: rgba(207,34,46,0.35);
+  background: rgba(207,34,46,0.10);
+  color: #a40e26;
+}
+
+.btnDanger:hover{
+  box-shadow: 0 0 0 3px rgba(207,34,46,0.14);
+}
+
+.btnGhost{
+  background: transparent;
+  border-color: rgba(31,35,40,0.12);
+}
+
+/* Disabled (your Button component likely adds disabled attr) */
+.btn:disabled{
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+.toast{
+  border-radius: var(--r12);
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.90);
+  font-size: 14px;
+}
+
+.toast.success{
+  border-color: rgba(31,136,61,0.30);
+  background: rgba(45,164,78,0.12);
+  color: #0f5f2a;
+}
+
+.toast.error{
+  border-color: rgba(207,34,46,0.30);
+  background: rgba(207,34,46,0.10);
+  color: #8a0d20;
+}
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+
+.badges{
+  display:flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.badge{
+  display:inline-flex;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid rgba(31,35,40,0.14);
+  background: rgba(255,255,255,0.90);
+  color: var(--muted);
+}
+
+.badgeGreen{
+  border-color: rgba(31,136,61,0.26);
+  background: rgba(45,164,78,0.12);
+  color: #0f5f2a;
+}
+
+/* =========================================================
+   TASK ITEM
+   ========================================================= */
+
+.task{
+  border-radius: var(--r16);
+  border: 1px solid rgba(31,35,40,0.14);
+  background: rgba(255,255,255,0.75);
+  padding: 14px;
+  transition: .15s;
+  box-shadow: var(--shadow-soft);
+}
+
+.task:hover{
+  transform: translateY(-1px);
+  border-color: rgba(130,80,223,0.28);
+  box-shadow: 0 14px 28px rgba(31,35,40,0.12);
+}
+
+/* =========================================================
+   AUTH (LOGIN / REGISTER)
+   ========================================================= */
+
+.authPage{
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+}
+
+.authCard{
+  width: min(420px, 100%);
+}
+
+.authHeader{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.authIcon{
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r12);
+  display:grid;
+  place-items:center;
+  border: 1px solid rgba(130,80,223,0.22);
+  background:
+    radial-gradient(80% 80% at 20% 20%, rgba(130,80,223,0.20), transparent 60%),
+    linear-gradient(180deg, rgba(45,164,78,0.22), rgba(45,164,78,0.10));
+  box-shadow: 0 12px 26px rgba(130,80,223,0.10);
+}
+
+.authTitle{
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.authSub{
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.authForm{
+  margin-top: 12px;
+  display:grid;
+  gap: 12px;
+}
+
+.authFooter{
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(31,35,40,0.12);
+  display:flex;
+  gap: 8px;
+  align-items:center;
+}
+
+.authLink{
+  color: #0969da; /* GitHub link blue */
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.authLink:hover{
+  text-decoration: underline;
+}
+
+.authMeta{
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
 }
