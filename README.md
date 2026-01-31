@@ -1,4 +1,4 @@
-# Smart Task Manager (Spring Boot + React + PostgreSQL + Docker Compose)
+# Smart Task Manager with AI (Spring Boot + React + PostgreSQL + Docker Compose)
 This repository is a **starter template** for building secure full‑stack web applications with:
 
 - **Backend:** Spring Boot (Java 21), Spring Web, Spring Security, Spring Data JPA (Hibernate)
