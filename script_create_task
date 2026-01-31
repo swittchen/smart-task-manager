@@ -19,7 +19,15 @@ Invoke-RestMethod -Method Put `
   -Body $upd
 
 # delete task
-
 Invoke-RestMethod -Method Delete `
   -Uri "http://localhost:8080/api/tasks/1" `
   -Headers @{ Authorization = "Bearer $token" }
+
+# create task with ai
+$task = @{ title="Prepare for job interview"; description="Learn Spring Security and practice REST" } | ConvertTo-Json
+Invoke-RestMethod -Method Post `
+  -Uri "http://localhost:8080/api/tasks" `
+  -ContentType "application/json" `
+  -Headers @{ Authorization = "Bearer $token" } `
+  -Body $task
+

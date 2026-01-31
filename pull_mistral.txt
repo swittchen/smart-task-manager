@@ -1,0 +1,2 @@
+# after build you have to pull the modell
+docker exec -it smt-ollama ollama pull mistral

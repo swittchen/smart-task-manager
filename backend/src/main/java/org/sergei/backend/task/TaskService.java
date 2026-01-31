@@ -1,6 +1,7 @@
 package org.sergei.backend.task;
 
 import jakarta.transaction.Transactional;
+import org.sergei.backend.ai.AiAssistantService;
 import org.sergei.backend.task.dto.TaskCreateRequest;
 import org.sergei.backend.task.dto.TaskResponse;
 import org.sergei.backend.task.dto.TaskUpdateRequest;
@@ -18,10 +19,12 @@ public class TaskService {
 
     private final TaskRepository tasks;
     private final UserRepository users;
+    private final AiAssistantService ai;
 
-    public TaskService(TaskRepository tasks, UserRepository users) {
+    public TaskService(TaskRepository tasks, UserRepository users, AiAssistantService ai) {
         this.tasks = tasks;
         this.users = users;
+        this.ai = ai;
     }
 
     public List<TaskResponse> listMyTasks(Authentication auth) {
@@ -40,8 +43,9 @@ public class TaskService {
         t.setDescription(req.description());
         t.setStatus("OPEN");
         t.setUser(user);
+        String category = ai.categorizeTask(t.getTitle(), t.getDescription());
+        t.setCategory(category);
 
-        // category пока null — позже подключим AI и будем заполнять
         Task saved = tasks.save(t);
         return toResponse(saved);
     }

@@ -1,4 +1,4 @@
-$token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNzY5ODc1NjQyLCJleHAiOjE3Njk4ODI4NDJ9.bowNZgCV_m7W5Zq3gjRrd4JLXuetgEA6XltHpZuwKlPyslIfS9ymOaAu9pQPU09wnVE6e4-kZl2S4rRv5Uzr4w"
+$token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNzY5ODc3NDYxLCJleHAiOjE3Njk4ODQ2NjF9.7zzBo9o2QPog5XDZm0ziiynHcYnoOsNLZ02JRcItFZ9Ok4Ej1ogidElho3SAB7aVQ24PKGV4ETUzyOizEAdsXg"
 Invoke-RestMethod -Method Get `
   -Uri "http://localhost:8080/api/me" `
   -Headers @{ Authorization = "Bearer $token" }
