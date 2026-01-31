@@ -1,0 +1,25 @@
+$task = @{ title="Buy groceries"; description="milk, eggs, chicken" } | ConvertTo-Json
+Invoke-RestMethod -Method Post `
+  -Uri "http://localhost:8080/api/tasks" `
+  -ContentType "application/json" `
+  -Headers @{ Authorization = "Bearer $token" } `
+  -Body $task
+
+  # get task
+  Invoke-RestMethod -Method Get `
+  -Uri "http://localhost:8080/api/tasks" `
+  -Headers @{ Authorization = "Bearer $token" }
+
+# update task
+$upd = @{ status="DONE" } | ConvertTo-Json
+Invoke-RestMethod -Method Put `
+  -Uri "http://localhost:8080/api/tasks/1" `
+  -ContentType "application/json" `
+  -Headers @{ Authorization = "Bearer $token" } `
+  -Body $upd
+
+# delete task
+
+Invoke-RestMethod -Method Delete `
+  -Uri "http://localhost:8080/api/tasks/1" `
+  -Headers @{ Authorization = "Bearer $token" }
