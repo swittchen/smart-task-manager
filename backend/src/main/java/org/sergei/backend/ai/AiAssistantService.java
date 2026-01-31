@@ -26,23 +26,27 @@ public class AiAssistantService {
     }
 
     public String categorizeTask(String title, String description) {
-        String text = (title == null ? "" : title) + "\n" + (description == null ? "" : description);
+        try {
+            String text = (title == null ? "" : title) + "\n" + (description == null ? "" : description);
 
-        String prompt = """
-                You are a strict classifier.
-                Categorize the task into exactly one of the categories:
-                Work, Personal, Health, Learning, Finance.
+            String prompt = """
+                    You are a strict classifier.
+                    Categorize the task into exactly one of the categories:
+                    Work, Personal, Health, Learning, Finance.
 
-                Return ONLY the category name, nothing else.
+                    Return ONLY the category name, nothing else.
 
-                Task:
-                %s
-                """.formatted(text);
+                    Task:
+                    %s
+                    """.formatted(text);
 
-        String raw = model.chat(prompt);
-        String cleaned = normalize(raw);
+            String raw = model.chat(prompt);
+            String cleaned = normalize(raw);
+            return ALLOWED.contains(cleaned) ? cleaned : "Personal";
+        } catch (Exception e) {
+            return "Personal";
+        }
 
-        return ALLOWED.contains(cleaned) ? cleaned : "Personal";
     }
 
     private String normalize(String raw) {

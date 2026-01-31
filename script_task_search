@@ -1,0 +1,16 @@
+# create several tasks
+
+$task1 = @{ title="Run 10km"; description="Sunday cardio" } | ConvertTo-Json
+Invoke-RestMethod -Method Post -Uri "http://localhost:8080/api/tasks" -ContentType "application/json" -Headers @{ Authorization = "Bearer $token" } -Body $task1
+
+$task2 = @{ title="Learn Spring Security"; description="JWT filter chain" } | ConvertTo-Json
+Invoke-RestMethod -Method Post -Uri "http://localhost:8080/api/tasks" -ContentType "application/json" -Headers @{ Authorization = "Bearer $token" } -Body $task2
+
+# search
+Invoke-RestMethod -Method Get `
+  -Uri "http://localhost:8080/api/tasks/search?q=spring" `
+  -Headers @{ Authorization = "Bearer $token" }
+
+Invoke-RestMethod -Method Get `
+  -Uri "http://localhost:8080/api/tasks/search?q=run" `
+  -Headers @{ Authorization = "Bearer $token" }

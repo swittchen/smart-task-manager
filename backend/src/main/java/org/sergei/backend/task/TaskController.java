@@ -43,4 +43,10 @@ public class TaskController {
         service.delete(auth, id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/search")
+    @PreAuthorize("hasRole('USER')")
+    public List<TaskResponse> search(Authentication auth, @RequestParam String q){
+        return service.searchMyTasks(auth, q);
+    }
 }

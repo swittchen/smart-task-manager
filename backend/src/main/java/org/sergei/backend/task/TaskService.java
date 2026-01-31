@@ -73,6 +73,21 @@ public class TaskService {
         tasks.delete(t);
     }
 
+    public List<TaskResponse> searchMyTasks(Authentication auth, String q) {
+        Long userId = currentUserId(auth);
+
+        String query = (q == null) ? "" : q.trim();
+        if (query.isBlank()) {
+            return listMyTasks(auth);
+        }
+
+        return tasks.searchOwned(userId, query)
+                .stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
+
     //========================HELPER METHODS============================================================
     private Long currentUserId(Authentication auth) {
         return currentUser(auth).getId();
