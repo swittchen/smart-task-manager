@@ -1,17 +1,53 @@
-# Smart Task Manager with AI (Spring Boot + React + PostgreSQL + Docker Compose)
-This repository is a **starter template** for building secure full‑stack web applications with:
+# Smart Task Manager with AI
 
-- **Backend:** Spring Boot (Java 21), Spring Web, Spring Security, Spring Data JPA (Hibernate)
-- **Frontend:** React + Vite
-- **Database:** PostgreSQL
-- **Dev/Run:** Docker Compose (one command to bring up DB + backend + frontend)
+![Java 21](https://img.shields.io/badge/Java-21-orange)
+![Spring Boot 4](https://img.shields.io/badge/Spring%20Boot-4.0-6db33f)
+![React](https://img.shields.io/badge/React-Vite-61dafb)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16%20%2B%20pgvector-336791)
+![Ollama](https://img.shields.io/badge/LLM-Ollama%20%2F%20Mistral-black)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 
-> Status: infrastructure / foundation is set up. Business features (entities, endpoints, UI screens) can be added iteratively.
+Full-stack task manager with JWT authentication and **local AI categorization**: every new task is classified by a Mistral model running in Ollama, so no task data leaves the machine. Everything starts with one `docker compose up`.
+
+![Architecture](docs/architecture.svg)
+
+## Features
+
+- **Authentication:** registration and login with Spring Security, BCrypt and stateless JWT
+- **Tasks REST API:** create, list, update, delete; every query is scoped to the logged-in user
+- **Search:** case-insensitive search in title and description
+- **AI categorization:** LangChain4j + Ollama (Mistral) assigns one of *Work, Personal, Health, Learning, Finance*; invalid or failed answers fall back to *Personal*, so the API never breaks because of the model
+- **Frontend:** React + Vite with login, registration and a task board
+- **One-command setup:** Docker Compose with PostgreSQL 16 (pgvector enabled for planned semantic search), backend, frontend and Ollama
+
+## API
+
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| POST | `/api/auth/register` | – | create a user, returns a JWT |
+| POST | `/api/auth/login` | – | returns a JWT |
+| GET | `/api/tasks` | JWT | list own tasks (newest first) |
+| POST | `/api/tasks` | JWT | create a task, AI sets `category` |
+| PUT | `/api/tasks/{id}` | JWT | update title, description or status |
+| DELETE | `/api/tasks/{id}` | JWT | delete own task |
+| GET | `/api/tasks/search?q=…` | JWT | search own tasks |
+
+```bash
+# example: create a task (token from /api/auth/login)
+curl -X POST http://localhost:8080/api/tasks \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"title":"Book dentist appointment","description":"next week"}'
+# → {"id":1,"title":"Book dentist appointment",...,"status":"OPEN","category":"Health"}
+```
+
+After the first `docker compose up`, pull the model once: `docker exec -it smt-ollama ollama pull mistral`.
 
 ---
 
 ## Table of contents
 
+- [Features](#features)
+- [API](#api)
 - [Project structure](#project-structure)
 - [Prerequisites](#prerequisites)
 - [Quick start](#quick-start)
@@ -27,7 +63,7 @@ This repository is a **starter template** for building secure full‑stack web a
 - [Frontend configuration notes](#frontend-configuration-notes)
 - [Git hygiene / secrets](#git-hygiene--secrets)
 - [Troubleshooting](#troubleshooting)
-- [Roadmap (suggested next steps)](#roadmap-suggested-next-steps)
+- [Roadmap](#roadmap)
 - [License](#license)
 
 ---
@@ -279,28 +315,21 @@ docker compose up -d --build
 
 ---
 
-## Roadmap (suggested next steps)
+## Roadmap
 
-If you want to turn this starter into a portfolio-ready app:
+Done:
+- [x] Domain model `User`, `Task` with repositories and service layer
+- [x] JWT authentication (register / login) and per-user task ownership
+- [x] Tasks CRUD and search under `/api/tasks`
+- [x] AI categorization with a local LLM (Ollama / Mistral)
+- [x] React frontend: login, registration, task board
 
-1) **Domain model**
-   - `Task`, `User`, `Workspace` (optional)
-2) **Persistence**
-   - repositories + service layer
-3) **API**
-   - CRUD endpoints under `/api`
-4) **Security**
-   - JWT auth (login/register)
-   - RBAC roles (ADMIN/USER)
-5) **Frontend**
-   - Auth pages
-   - Task list + detail view
-6) **Quality**
-   - Testcontainers for integration tests
-   - CI pipeline (GitHub Actions)
-7) **Production**
-   - Nginx reverse proxy
-   - Flyway migrations
+Next:
+- [ ] Semantic search with embeddings in pgvector
+- [ ] Integration tests with Testcontainers
+- [ ] CI pipeline (GitHub Actions)
+- [ ] Flyway migrations instead of `ddl-auto=update`
+- [ ] Nginx reverse proxy for production
 
 ---
 
