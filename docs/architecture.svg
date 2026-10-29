@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="330" viewBox="0 0 880 330" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="880" height="330" rx="12" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#475569"/>
+    </marker>
+  </defs>
+  <text x="440" y="34" text-anchor="middle" font-size="18" font-weight="600" fill="#0f172a">Smart Task Manager · Architecture (Docker Compose)</text>
+
+  <!-- Browser / React -->
+  <rect x="30" y="110" width="170" height="110" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="115" y="145" text-anchor="middle" font-size="16" font-weight="600" fill="#0c4a6e">Frontend</text>
+  <text x="115" y="168" text-anchor="middle" font-size="13" fill="#0c4a6e">React + Vite</text>
+  <text x="115" y="188" text-anchor="middle" font-size="13" fill="#0c4a6e">Login · Register · Tasks</text>
+  <text x="115" y="208" text-anchor="middle" font-size="12" fill="#0369a1">:5173</text>
+
+  <!-- Backend -->
+  <rect x="300" y="80" width="260" height="170" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="430" y="112" text-anchor="middle" font-size="16" font-weight="600" fill="#14532d">Backend · Spring Boot 4 (Java 21)</text>
+  <text x="430" y="140" text-anchor="middle" font-size="13" fill="#14532d">Spring Security + JWT (register / login)</text>
+  <text x="430" y="162" text-anchor="middle" font-size="13" fill="#14532d">Tasks REST API: CRUD + search</text>
+  <text x="430" y="184" text-anchor="middle" font-size="13" fill="#14532d">per-user ownership checks</text>
+  <text x="430" y="206" text-anchor="middle" font-size="13" fill="#14532d">AI categorization (LangChain4j)</text>
+  <text x="430" y="236" text-anchor="middle" font-size="12" fill="#15803d">:8080</text>
+
+  <!-- DB -->
+  <rect x="660" y="60" width="190" height="95" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="755" y="92" text-anchor="middle" font-size="16" font-weight="600" fill="#3b0764">PostgreSQL 16</text>
+  <text x="755" y="114" text-anchor="middle" font-size="13" fill="#3b0764">users · tasks (JPA)</text>
+  <text x="755" y="134" text-anchor="middle" font-size="13" fill="#3b0764">pgvector extension enabled</text>
+
+  <!-- Ollama -->
+  <rect x="660" y="185" width="190" height="95" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="755" y="217" text-anchor="middle" font-size="16" font-weight="600" fill="#78350f">Ollama</text>
+  <text x="755" y="239" text-anchor="middle" font-size="13" fill="#78350f">local LLM: Mistral</text>
+  <text x="755" y="259" text-anchor="middle" font-size="13" fill="#78350f">no data leaves the machine</text>
+
+  <!-- arrows -->
+  <line x1="200" y1="165" x2="296" y2="165" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <text x="248" y="155" text-anchor="middle" font-size="12" fill="#475569">REST + JWT</text>
+  <line x1="560" y1="130" x2="656" y2="108" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <text x="606" y="108" text-anchor="middle" font-size="12" fill="#475569">JDBC</text>
+  <line x1="560" y1="205" x2="656" y2="230" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <text x="606" y="236" text-anchor="middle" font-size="12" fill="#475569">HTTP</text>
+
+  <text x="440" y="310" text-anchor="middle" font-size="12" fill="#64748b">New task → Mistral assigns one category: Work · Personal · Health · Learning · Finance (fallback: Personal)</text>
+</svg>
